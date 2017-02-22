@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sample03</title>
+</head>
+<body>
+    <img
+      src="https://timkadlec.com/test/mq-svg/kiwi-mq.svg"
+      height="300"
+      width="300"
+      style="margin: 20px; position: relative; left: 1px; top: 0px;" />
+    <script>
+        {
+            var img = document.querySelector('img');
+            var pos = {};
+            var scale = 1;
+            img.onmousemove = function(e){
+                e.preventDefault();
+                console.log(e, e.clientX, e.clientY, e.offsetX,  e.offsetY);
+                // pos.x = e.clientX;
+                // pos.y = e.clientY;
+                pos.x = e.offsetX;
+                pos.y = e.offsetY;
+            };
+            
+            img.onwheel = function(e){
+                console.log(e);
+                e.preventDefault();
+                img.style.transformOrigin = pos.x + 'px ' + pos.y + 'px';
+                console.log(img.style.transformOrigin);
+                // img.style.transformOrigin = '50% 50%';
+                if(e.deltaY > 0){
+                    console.log(e.deltaY);
+                    scale *= 1.05;
+                }
+                else{
+                    console.log(e.deltaY);
+                    scale *= 0.95;
+                }
+                img.style.transform = 'scale(' + scale + ')';
+                
+                // 要修正 offset left & top
+                console.log(img.style.transformOrigin, pos);
+            }
+        }
+    </script>
+</body>
+</html>
