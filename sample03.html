@@ -12,23 +12,41 @@
     <script>
         {
             var img = document.querySelector('img');
+            var scalePos = {
+                x: img.width / 2,
+                y: img.height / 2,
+            };
             var pos = {};
             var scale = 1;
+            var currentTranslate = {
+                x: 0,
+                y: 0
+            }
             img.onmousemove = function(e){
                 e.preventDefault();
+                // var mousex = e.clientX - e.target.offsetLeft;
+                // var mousey = e.clientY - e.target.offsetTop;
+                // console.log('mousex, mousey=>', mousex, mousey);
                 console.log(e, e.clientX, e.clientY, e.offsetX,  e.offsetY);
                 // pos.x = e.clientX;
                 // pos.y = e.clientY;
                 pos.x = e.offsetX;
                 pos.y = e.offsetY;
+                console.log(scalePos.x - pos.x, scalePos.y - pos.y);
             };
             
             img.onwheel = function(e){
                 console.log(e);
                 e.preventDefault();
+
+                // var mousex = e.clientX - e.target.offsetLeft;
+                // var mousey = e.clientY - e.target.offsetTop;
+                // console.log('mousex, mousey=>', mousex, mousey);
+
                 img.style.transformOrigin = pos.x + 'px ' + pos.y + 'px';
                 console.log(img.style.transformOrigin);
                 // img.style.transformOrigin = '50% 50%';
+                var old_scale = scale;
                 if(e.deltaY > 0){
                     console.log(e.deltaY);
                     scale *= 1.05;
@@ -37,10 +55,18 @@
                     console.log(e.deltaY);
                     scale *= 0.95;
                 }
+
                 img.style.transform = 'scale(' + scale + ')';
-                
+
+                // var offsetX = pos.x * old_scale - pos.x * scale;
+                // var offsetY = pos.y * old_scale - pos.y * scale;
+
+
+                // img.style.transform += ' translate(' + currentTranslate.x + offsetX + 'px,' + currentTranslate.y + offsetY + 'px)';
                 // 要修正 offset left & top
                 console.log(img.style.transformOrigin, pos);
+                scalePos.x = pos.x;
+                scalePos.y = pos.y;
             }
         }
     </script>
