@@ -45,7 +45,7 @@
                 var $offsetY = mousey * scale - mousey * old_scale;
                 offsetX = offsetX - $offsetX;
                 offsetY = offsetY - $offsetY;
-                // translate pixel real pix * scale
+                // scale=2 後移動 1pixel 會相當於物理畫面的 2pixel
                 img.style.transform = 'scale(' + scale + ')' + ' translate(' + offsetX/scale + 'px,' + offsetY/scale + 'px)';
             }
         }
