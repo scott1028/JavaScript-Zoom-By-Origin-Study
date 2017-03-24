@@ -44,6 +44,7 @@
                 var $offsetY = mousey * scale - mousey * old_scale;
                 offsetX = offsetX - $offsetX;
                 offsetY = offsetY - $offsetY;
+                // translate pixel is real value(as scale: 1) when any scale.
                 img.style.transform = 'scale(' + scale + ')' + ' translate(' + offsetX + 'px,' + offsetY + 'px)';
             }
         }
