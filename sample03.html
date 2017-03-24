@@ -15,6 +15,8 @@
             var scale = 1;
             var offsetX = 0;
             var offsetY = 0;
+            img.style.transformOrigin = '0px 0px';
+            img.style.transform = 'scale(2,2)'
             // img.style.transformOrigin = '50% 50%';
 
             img.onmousemove = function(e){
@@ -30,7 +32,6 @@
                 var mousex = e.clientX - img.offsetLeft;
                 var mousey = e.clientY - img.offsetTop;
                 console.log(mousex, mousey);
-                img.style.transformOrigin = '0px 0px';
                 var old_scale = scale;
                 if(e.deltaY > 0){
                     scale *= 2;
@@ -44,8 +45,8 @@
                 var $offsetY = mousey * scale - mousey * old_scale;
                 offsetX = offsetX - $offsetX;
                 offsetY = offsetY - $offsetY;
-                // translate pixel is real value(as scale: 1) when any scale.
-                img.style.transform = 'scale(' + scale + ')' + ' translate(' + offsetX + 'px,' + offsetY + 'px)';
+                // translate pixel real pix * scale
+                img.style.transform = 'scale(' + scale + ')' + ' translate(' + offsetX/scale + 'px,' + offsetY/scale + 'px)';
             }
         }
     </script>
