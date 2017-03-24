@@ -19,23 +19,23 @@
             // img.style.transform = 'scale(2,2)'
             // img.style.transformOrigin = '50% 50%';
 
-            img.onmousemove = function(e){
-                var mousex = e.offsetX;  // 永遠回傳 scale=1 的 mouse position.x
-                var mousey = e.offsetY;  // 永遠回傳 scale=1 的 mouse position.y
-                // var mousex = e.clientX - img.offsetLeft;
-                // var mousey = e.clientY - img.offsetTop;
-                console.log(mousex, mousey);  // equal: console.log(e.clientX, e.clientY);
-            };
+            // img.onmousemove = function(e){
+            //     var mousex = e.offsetX;  // 永遠回傳 scale=1 的 mouse position.x
+            //     var mousey = e.offsetY;  // 永遠回傳 scale=1 的 mouse position.y
+            //     // var mousex = e.clientX - img.offsetLeft;
+            //     // var mousey = e.clientY - img.offsetTop;
+            //     console.log(mousex, mousey);  // equal: console.log(e.clientX, e.clientY);
+            // };
 
             img.onwheel = function(e){
-                console.log(e);
+                // console.log(e);
                 // console.log(e.offsetX, e.offsetY);
                 e.preventDefault();
                 var mousex = e.offsetX;  // 永遠回傳 scale=1 的 mouse position.x
                 var mousey = e.offsetY;  // 永遠回傳 scale=1 的 mouse position.y
                 // var mousex = e.clientX - img.offsetLeft;
                 // var mousey = e.clientY - img.offsetTop;
-                console.log(mousex, mousey, scale);
+                console.log(mousex, mousey, scale, offsetX, offsetY);
                 var old_scale = scale;
                 if(e.deltaY > 0){
                     scale *= 2;
@@ -55,13 +55,20 @@
                 // ex: scale=2 originWidth=200 -> DeviceWidth=400
                 //     放大前後物理距離就相差: 400 - 200 = 200
                 //     放大後要往左移動 200 物理距離，所以只需要移動 100 因為 scale=2 就會有 200 物理距離的效果
+                //
+                // 算出縮放前後真實物理的距離差距(originLength * Scale)
+                //
                 var $offsetX = mousex * scale - mousex * old_scale;
                 var $offsetY = mousey * scale - mousey * old_scale;
 
+                // 把需要偏移的真實物理距離累積
                 offsetX = offsetX - $offsetX;
                 offsetY = offsetY - $offsetY;
+
+                // 並且利用縮放的 `要偏移的真實物理距離累積 * Scale` 算出需要偏移的 UI距離
                 // scale=2 後移動 1pixel 會相當於物理畫面的 2pixel
                 img.style.transform = 'scale(' + scale + ')' + ' translate(' + offsetX/scale + 'px,' + offsetY/scale + 'px)';
+                console.log(mousex, mousey, scale, offsetX, offsetY);
             }
         }
     </script>
