@@ -45,8 +45,13 @@
                 }
 
 
+                // 算出 scale 後當前滑鼠相對於 img 內的座標會差多少 Pixel, ex: (10, 10), scale(1.5) => (15,15).
+                // 所以需要往回移動 5px / scale
+                // (300, 300) scale(2) => (600, 600)
+                // 所以需要往回移動 300px / scale
                 var $offsetX = mousex * scale - mousex * old_scale;
                 var $offsetY = mousey * scale - mousey * old_scale;
+
                 offsetX = offsetX - $offsetX;
                 offsetY = offsetY - $offsetY;
                 // scale=2 後移動 1pixel 會相當於物理畫面的 2pixel
