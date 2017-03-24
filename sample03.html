@@ -19,13 +19,13 @@
             // img.style.transform = 'scale(2,2)'
             // img.style.transformOrigin = '50% 50%';
 
-            // img.onmousemove = function(e){
-            //     var mousex = e.offsetX;  // 永遠回傳 scale=1 的 mouse position.x
-            //     var mousey = e.offsetY;  // 永遠回傳 scale=1 的 mouse position.y
-            //     // var mousex = e.clientX - img.offsetLeft;
-            //     // var mousey = e.clientY - img.offsetTop;
-            //     console.log(mousex, mousey);  // equal: console.log(e.clientX, e.clientY);
-            // };
+            img.onmousemove = function(e){
+                var mousex = e.offsetX;  // 永遠回傳 scale=1 的 mouse position.x
+                var mousey = e.offsetY;  // 永遠回傳 scale=1 的 mouse position.y
+                // var mousex = e.clientX - img.offsetLeft;
+                // var mousey = e.clientY - img.offsetTop;
+                console.log(mousex, mousey);  // equal: console.log(e.clientX, e.clientY);
+            };
 
             img.onwheel = function(e){
                 // console.log(e);
