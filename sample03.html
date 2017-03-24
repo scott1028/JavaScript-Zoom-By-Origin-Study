@@ -16,7 +16,7 @@
             var offsetX = 0;
             var offsetY = 0;
             img.style.transformOrigin = '0px 0px';
-            img.style.transform = 'scale(2,2)'
+            // img.style.transform = 'scale(2,2)'
             // img.style.transformOrigin = '50% 50%';
 
             img.onmousemove = function(e){
@@ -31,7 +31,7 @@
                 e.preventDefault();
                 var mousex = e.clientX - img.offsetLeft;
                 var mousey = e.clientY - img.offsetTop;
-                console.log(mousex, mousey);
+                console.log(mousex, mousey, scale);
                 var old_scale = scale;
                 if(e.deltaY > 0){
                     scale *= 2;
