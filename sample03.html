@@ -77,8 +77,13 @@
             }
         }
 
-        // 實做拖曳
+        // 實做拖曳 & 定格拖曳
         {
+            function calcValue(value){
+                var snapValue = 40;
+                return parseInt(value / snapValue * 1.0) * snapValue;
+            }
+
             var img = document.querySelector('img');
             img.onmousedown = function(e){
                 e.preventDefault();
@@ -100,8 +105,8 @@
                         y: e.clientY,
                     };
 
-                    img.style.left = curr.x + end.x - origin.x + 'px';
-                    img.style.top = curr.y + end.y - origin.y + 'px';
+                    img.style.left = calcValue(curr.x + end.x - origin.x) + 'px';
+                    img.style.top = calcValue(curr.y + end.y - origin.y) + 'px';
                 };
 
                 document.addEventListener('mousemove', callback);
