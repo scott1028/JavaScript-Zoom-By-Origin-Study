@@ -10,6 +10,7 @@
       width="300"
       style="margin: 0px; position: relative; left: 1px; top: 0px;" />
     <script>
+        // 實做地圖風格縮放
         {
             var img = document.querySelector('img');
             var scale = 1;
@@ -38,10 +39,10 @@
                 console.log(mousex, mousey, scale, offsetX, offsetY);
                 var old_scale = scale;
                 if(e.deltaY > 0){
-                    scale *= 2;
+                    scale *= 1.1;
                 }
                 else{
-                    scale *= .5;
+                    scale *= .9;
                 }
 
 
@@ -71,6 +72,40 @@
                 // scale=2 後移動 1pixel 會相當於物理畫面的 2pixel
                 img.style.transform = 'scale(' + scale + ')' + ' translate(' + offsetX/scale + 'px,' + offsetY/scale + 'px)';
                 console.log(mousex, mousey, scale, offsetX, offsetY);
+            }
+        }
+
+        // 實做拖曳
+        {
+            var img = document.querySelector('img');
+            img.onmousedown = function(e){
+                var curr = {
+                    x: parseInt(e.target.style.left || 0),
+                    y: parseInt(e.target.style.top || 0),
+                };
+
+                var origin = {
+                    x: e.clientX,
+                    y: e.clientY,
+                };
+
+                e.preventDefault();
+                var callback = function(e){
+                    console.log(e);
+                    var end = {
+                        x: e.clientX,
+                        y: e.clientY,
+                    };
+
+                    e.target.style.left = curr.x + end.x - origin.x + 'px';
+                    e.target.style.top = curr.y + end.y - origin.y + 'px';
+                };
+
+                e.target.addEventListener('mousemove', callback);
+
+                document.addEventListener('mouseup', function(e){
+                    e.target.removeEventListener('mousemove', callback);
+                });
             }
         }
     </script>
