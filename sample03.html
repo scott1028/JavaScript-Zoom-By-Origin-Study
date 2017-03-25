@@ -4,11 +4,13 @@
     <title>Sample03</title>
 </head>
 <body style="padding: 0px; margin: 0px;">
-    <img
-      src="https://timkadlec.com/test/mq-svg/kiwi-mq.svg"
-      height="300"
-      width="300"
-      style="margin: 0px; position: relative; left: 1px; top: 0px;" />
+    <div style="position: relative; left: 5px; top: 5px; width: 600px; height: 400px; overflow: hidden; border: 1px solid #aaa;">
+        <img
+          src="https://timkadlec.com/test/mq-svg/kiwi-mq.svg"
+          height="300"
+          width="300"
+          style="margin: 0px; position: relative; left: 1px; top: 0px;" />
+    </div>
     <script>
         // 實做地圖風格縮放
         {
@@ -79,6 +81,8 @@
         {
             var img = document.querySelector('img');
             img.onmousedown = function(e){
+                e.preventDefault();
+
                 var curr = {
                     x: parseInt(e.target.style.left || 0),
                     y: parseInt(e.target.style.top || 0),
@@ -89,7 +93,6 @@
                     y: e.clientY,
                 };
 
-                e.preventDefault();
                 var callback = function(e){
                     console.log(e);
                     var end = {
@@ -97,14 +100,14 @@
                         y: e.clientY,
                     };
 
-                    e.target.style.left = curr.x + end.x - origin.x + 'px';
-                    e.target.style.top = curr.y + end.y - origin.y + 'px';
+                    img.style.left = curr.x + end.x - origin.x + 'px';
+                    img.style.top = curr.y + end.y - origin.y + 'px';
                 };
 
-                e.target.addEventListener('mousemove', callback);
+                document.addEventListener('mousemove', callback);
 
                 document.addEventListener('mouseup', function(e){
-                    e.target.removeEventListener('mousemove', callback);
+                    document.removeEventListener('mousemove', callback);
                 });
             }
         }
