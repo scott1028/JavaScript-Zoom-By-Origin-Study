@@ -16,6 +16,8 @@
         {
             var img = document.querySelector('img');
             var scale = 1;
+
+            // 以下有時候 Firefox 有問題就全改用 layerX, layerY, 因為 layerX/Y屬性是以border左上角為原點，offsetX/Y屬性是以內容左上角為原點
             var offsetX = 0;
             var offsetY = 0;
             img.style.transformOrigin = '0px 0px';
