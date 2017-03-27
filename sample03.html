@@ -109,11 +109,13 @@
                     img.style.top = calcValue(curr.y + end.y - origin.y) + 'px';
                 };
 
-                document.addEventListener('mousemove', callback);
-
-                document.addEventListener('mouseup', function(e){
+                var callbackMU = function(e){
+                    document.removeEventListener('mouseup', callbackMU);
                     document.removeEventListener('mousemove', callback);
-                });
+                };
+
+                document.addEventListener('mousemove', callback);
+                document.addEventListener('mouseup', callbackMU);
             }
         }
     </script>
