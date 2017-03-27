@@ -18,6 +18,7 @@
             var scale = 1;
 
             // 以下有時候 Firefox 有問題就全改用 layerX, layerY, 因為 layerX/Y屬性是以border左上角為原點，offsetX/Y屬性是以內容左上角為原點
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
             var offsetX = 0;
             var offsetY = 0;
             img.style.transformOrigin = '0px 0px';
@@ -25,8 +26,8 @@
             // img.style.transformOrigin = '50% 50%';
 
             img.onmousemove = function(e){
-                var mousex = e.offsetX;  // 永遠回傳 scale=1 的 mouse position.x
-                var mousey = e.offsetY;  // 永遠回傳 scale=1 的 mouse position.y
+                var mousex = isChrome ? e.offsetX : e.layerX;  // 永遠回傳 scale=1 的 mouse position.x
+                var mousey = isChrome ? e.offsetY : e.layerY;  // 永遠回傳 scale=1 的 mouse position.y
                 // var mousex = e.clientX - img.offsetLeft;
                 // var mousey = e.clientY - img.offsetTop;
                 console.log(mousex, mousey);  // equal: console.log(e.clientX, e.clientY);
