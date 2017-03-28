@@ -37,7 +37,8 @@
                 console.log(mousex, mousey);  // equal: console.log(e.clientX, e.clientY);
             };
 
-            img.onwheel = function(e){
+            // Note: do not use .onwheel event, IE no support.
+            img.onmousewheel = function(e){
                 // console.log(e);
                 // console.log(e.offsetX, e.offsetY);
                 e.preventDefault();
