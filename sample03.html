@@ -4,6 +4,7 @@
     <title>Sample03</title>
 </head>
 <body style="padding: 0px; margin: 0px;">
+    Work For IE11, Chrome, Firefox.
     <div style="position: relative; left: 5px; top: 5px; width: 600px; height: 400px; overflow: hidden; border: 1px solid #aaa;">
         <img
           src="worldmap.svg"
@@ -48,7 +49,8 @@
                 // var mousey = e.clientY - img.offsetTop;
                 console.log(mousex, mousey, scale, offsetX, offsetY);
                 var old_scale = scale;
-                if(e.deltaY > 0){
+                // support for IE `e.wheelDelta`
+                if((e.deltaY || e.wheelDelta) > 0){
                     scale *= 1.1;
                 }
                 else{
